@@ -342,67 +342,156 @@ body {
 }
 
 
-/* 基础样式 */
+/* ================== 核心列表样式 ================== */
+
+
+/* 方案一：精准间距控制 */
+.detail-nav {
+    margin-bottom: 1.5rem; /* 底部外间距 */
+    padding: 0.8rem 0;     /* 上下内间距 */
+  }
+  
+  .back-button {
+    display: inline-block;
+    line-height: 1.6;      /* 行高增加 */
+    padding: 0.5rem 1rem; /* 按钮内边距 */
+    text-decoration: none;
+  }
+  
+  /* ================== 基础段落样式 ================== */
+.p_article {
+    font-size: 1rem;          /* 基准16px */
+    line-height: 1.7;         /* 黄金阅读比例 */
+    margin: 0 0 1.25rem;      /* 段落间距 */
+    color: #333;              /* 最佳阅读色 */
+    text-align: justify;      /* 两端对齐 */
+    text-rendering: optimizeLegibility;
+    font-family: system-ui, -apple-system, sans-serif;
+    hyphens: auto;            /* 智能断词 */
+    font-kerning: normal;      /* 专业字距 */
+}
+
+/* ================== 响应式优化 ================== */
+@media (max-width: 768px) {
+    .p_article {
+        font-size: 0.9rem;     /* 移动端字号 */
+        line-height: 1.65;     /* 紧凑行距 */
+        margin-bottom: 1rem;   /* 缩小间距 */
+        text-align: start;     /* 移动端左对齐 */
+        hyphens: none;         /* 禁用自动断词 */
+    }
+
+    /* 触摸设备优化 */
+    @media (pointer: coarse) {
+        .p_article {
+            line-height: 1.75;  /* 增大触控行距 */
+            margin-bottom: 1.2rem;
+        }
+    }
+}
+
+/* ================== 打印优化 ================== */
+@media print {
+    .p_article {
+        font-size: 12pt !important;     /* 印刷标准 */
+        line-height: 1.75 !important;   /* 打印行距 */
+        color: #000 !important;         /* 纯黑保证清晰 */
+        margin: 0 0 1cm !important;     /* 厘米单位 */
+        orphans: 3;                     /* 控制段末行数 */
+        widows: 3;
+        text-align: justify;            /* 强制两端对齐 */
+    }
+
+    /* 打印链接处理 */
+    .p_article a {
+        color: #000;
+        text-decoration: underline;
+        word-wrap: break-word;
+    }
+}
+
+/* ================== 高级排版增强 ================== */
+.p_article {
+    text-spacing: auto;                /* 专业间距控制 */
+    hanging-punctuation: allow-end;    /* 标点悬挂 */
+    font-variant-ligatures: common-ligatures; /* 连字优化 */
+}
+
+/* ================== 核心列表样式 ================== */
 .ol_lei {
+    --base-font: 1rem;         /* 基准尺寸 */
+    --line-ratio: 1.75;        /* 行高系数 */
+    --spacing-unit: 1.25em;   /* 间距单位 */
+
     counter-reset: section;
-    margin: 1rem 0;
-    padding-left: 2.5em;
+    margin: var(--spacing-unit) 0;
+    padding-left: 0;
     list-style: none;
-    line-height: 1.6;
-    font-size: 1.05rem;
+    font-size: var(--base-font);
+    line-height: var(--line-ratio);
+    font-family: system-ui, -apple-system, sans-serif;
+    color: #333;
 }
 
 .ol_lei > li {
     position: relative;
-    margin-bottom: 0.8rem;
-    padding-left: 1em;
-    text-indent: -1.2em;
+    margin-bottom: var(--spacing-unit);
+    padding-left: 4em;          /* 固定编号区域 */
+    text-align: justify;
+    text-justify: inter-ideograph;
 }
 
+/* 智能编号系统 */
 .ol_lei > li::before {
     content: counter(section) ".";
     counter-increment: section;
     color: var(--tsinghua-purple);
     font-weight: 500;
     position: absolute;
-    left: -2em;
-    width: 1.5em;
+    left: 1em;
+    width: 2em;
     text-align: right;
+    font-variant-numeric: tabular-nums
 }
 
-/* 移动端适配 */
+/* ================== 响应式优化 ================== */
 @media (max-width: 768px) {
     .ol_lei {
-        padding-left: 2em;
-        font-size: 0.95rem;  /* 缩小字号 */
-        line-height: 1.5;    /* 紧凑行距 */
+        --base-font: 1rem;  /* 14px */
+        --spacing-unit: 1.2em;
     }
     
     .ol_lei > li {
-        margin-bottom: 0.6rem;
-        text-indent: -1em;   /* 减少缩进量 */
+        padding-left: 3.5em;
     }
     
     .ol_lei > li::before {
-        left: -1.8em;        /* 微调编号位置 */
-        width: 1.2em;
+        left: 0.8em;
+        width: 1.8em;
     }
 }
 
-/* 打印适配 */
+/* ================== 打印优化 ================== */
 @media print {
     .ol_lei {
-        padding-left: 3cm;  /* 保证打印缩进 */
-        font-size: 12pt;    /* 标准打印字号 */
+        --base-font: 1rem;
+        --line-ratio: 1.75;
+        --spacing-unit: 1.25em;
     }
     
     .ol_lei > li::before {
-        color: #000;        /* 黑色保证可读性 */
-        font-weight: 600;    /* 加粗打印效果 */
+        color: #000 !important;
+        font-weight: 600;
     }
-    
-    .ol_lei > li {
-        page-break-inside: avoid; /* 避免跨页断行 */
-        text-indent: -1.5em;     /* 打印专用缩进 */
-    }
+}
+
+/* ================== 尺寸验证系统 ================== */
+.ol_lei > li {
+    font-size: calc(var(--base-font) * 1);
+    line-height: calc(var(--base-font) * var(--line-ratio));
+}
+
+.ol_lei > li::before {
+    font-size: calc(var(--base-font) * 1);
+    line-height: calc(var(--base-font) * var(--line-ratio));
 }
