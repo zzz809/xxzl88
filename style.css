@@ -1,0 +1,408 @@
+/* style.css */
+:root {
+    --tsinghua-purple: #7F1386;
+    --text-white: #ffffff;
+    --text-light: rgba(255,255,255,0.9);
+    --content-width: min(90%, 1200px);
+    --radius-base: 8px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 基础重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Microsoft YaHei', sans-serif;
+}
+
+/* 布局系统 */
+body {
+    background: #f8f9fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6;
+}
+
+/* 头部样式 */
+.full-header {
+    background: var(--tsinghua-purple);
+    padding: 1rem 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.header-container {
+    width: var(--content-width);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 0 1rem;
+}
+
+.header-left {
+    flex: 1;
+    min-width: 0;
+}
+
+.header-left h1 {
+    color: var(--text-white);
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.5rem;
+}
+
+.contact-info {
+    color: var(--text-light);
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.95em;
+}
+
+.header-qrcode {
+    width: clamp(60px, 8vw, 80px);
+    height: clamp(60px, 8vw, 80px);
+    border-radius: var(--radius-base);
+    border: 2px solid rgba(255,255,255,0.3);
+}
+
+/* 主内容区 */
+.content-area {
+    flex: 1;
+    width: var(--content-width);
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* 公告卡片 */
+.announcement-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+.announcement {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--radius-base);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: var(--transition);
+}
+
+.announcement-header {
+    border-left: 4px solid var(--tsinghua-purple);
+    padding-left: 1rem;
+    margin-left: -1rem;
+}
+
+.announcement h2 {
+    color: var(--tsinghua-purple);
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    position: relative;
+}
+
+.meta time {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(127, 19, 134, 0.08);
+    color: #7d3c98;
+    padding: 0.3rem 1rem;
+    border-radius: 1rem;
+    font-size: 0.9em;
+}
+
+.meta time::before {
+    content: "📅 ";
+    margin-right: 0.3rem;
+}
+
+/* 详情页样式 */
+.detail-container {
+    width: var(--content-width);
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background: var(--tsinghua-purple);
+    color: white;
+    border-radius: 2rem;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+/* 页脚优化 */
+.full-footer {
+    background: var(--tsinghua-purple);
+    color: var(--text-white);
+    padding: 1.5rem 0;
+    margin-top: auto;
+}
+
+.footer-content {
+    width: var(--content-width);
+    margin: 0 auto;
+    padding: 0 1rem;
+    text-align: center;
+}
+
+/* 交互效果 */
+.announcement-link:hover .announcement {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.back-button:hover {
+    background: #6a1070;
+    transform: translateX(0.5rem);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .header-container {
+        flex-wrap: wrap;
+    }
+    
+    .header-qrcode {
+        order: 1;
+        margin-left: auto;
+    }
+    
+    .announcement-header {
+        border-left-width: 3px;
+    }
+}
+
+@media (max-width: 480px) {
+    .meta time {
+        font-size: 0.85em;
+        padding: 0.2rem 0.8rem;
+    }
+    
+    .back-button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+
+/* h2标题样式 */
+.announcement-detail h2 {
+    background: rgba(127, 19, 134, 0.08);
+    color: #4a2355; /* 深紫色 */
+    padding: 1rem 1.5rem;
+    border-left: 4px solid var(--tsinghua-purple);
+    margin: 2rem 0 1.5rem;
+    font-size: 1.4rem;
+    border-radius: 4px 0 0 4px;
+    position: relative;
+}
+
+/* 内容区块排版 */
+.content-section {
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+}
+
+.content-section p {
+    margin-bottom: 1.5em;
+    text-align: justify;
+    hyphens: auto; /* 自动断字 */
+}
+
+/* 打印优化 */
+@media print {
+    .content-section {
+        line-height: 1.6;
+        font-size: 12pt;
+        padding: 0 !important;
+    }
+    
+    .announcement-detail h2 {
+        background: none;
+        border-left: 3px solid #000;
+        color: #000;
+        page-break-after: avoid;
+    }
+    
+    .content-section a::after {
+        content: " (" attr(href) ")";
+        font-size: 0.9em;
+    }
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .announcement-detail h2 {
+        font-size: 1.2rem;
+        padding: 0.8rem 1rem;
+        margin-left: -1rem;
+    }
+    
+    .content-section {
+        padding: 0;
+    }
+}
+
+/* h1标题样式 */
+.announcement-detail h1 {
+    color: var(--tsinghua-purple);
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    line-height: 1.3;
+    margin: 0 0 1.5rem;
+    padding: 0 0 1.2rem;
+    border-bottom: 3px solid rgba(127, 19, 134, 0.15);
+    position: relative;
+}
+
+/* 添加装饰元素 */
+.announcement-detail h1::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 120px;
+    height: 3px;
+    background: var(--tsinghua-purple);
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .announcement-detail h1 {
+        font-size: 1.6rem;
+        padding-bottom: 1rem;
+        margin-bottom: 1.2rem;
+    }
+    
+    .announcement-detail h1::after {
+        width: 80px;
+    }
+}
+
+/* 打印优化 */
+@media print {
+    .announcement-detail h1 {
+        color: #000;
+        border-bottom-color: #666;
+    }
+    
+    .announcement-detail h1::after {
+        background: #666;
+    }
+}
+
+/* 段落样式 */
+.content-section p {
+    font-size: 1.05rem;
+    text-indent: 2em; /* 首行缩进2字符 */
+    text-align: justify; /* 两端对齐 */
+    margin: 1rem 0;
+    line-height: 1.8;
+    color: #333;
+}
+
+/* 有序列表优化 */
+
+/* 打印适配 */
+@media print {
+    .content-section p {
+        font-size: 12pt;
+        text-indent: 2em;
+        line-height: 1.6;
+        color: #000 !important;
+        orphans: 3; /* 避免段内分页 */
+        widows: 3;
+    }
+    /* 显示链接地址 */
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.9em;
+        color: #666;
+    }
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+    .content-section p {
+        font-size: 1rem;
+        text-align: left; /* 移动端左对齐 */
+    }
+}
+
+
+/* 基础样式 */
+.ol_lei {
+    counter-reset: section;
+    margin: 1rem 0;
+    padding-left: 2.5em;
+    list-style: none;
+    line-height: 1.6;
+    font-size: 1.05rem;
+}
+
+.ol_lei > li {
+    position: relative;
+    margin-bottom: 0.8rem;
+    padding-left: 1em;
+    text-indent: -1.2em;
+}
+
+.ol_lei > li::before {
+    content: counter(section) ".";
+    counter-increment: section;
+    color: var(--tsinghua-purple);
+    font-weight: 500;
+    position: absolute;
+    left: -2em;
+    width: 1.5em;
+    text-align: right;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .ol_lei {
+        padding-left: 2em;
+        font-size: 0.95rem;  /* 缩小字号 */
+        line-height: 1.5;    /* 紧凑行距 */
+    }
+    
+    .ol_lei > li {
+        margin-bottom: 0.6rem;
+        text-indent: -1em;   /* 减少缩进量 */
+    }
+    
+    .ol_lei > li::before {
+        left: -1.8em;        /* 微调编号位置 */
+        width: 1.2em;
+    }
+}
+
+/* 打印适配 */
+@media print {
+    .ol_lei {
+        padding-left: 3cm;  /* 保证打印缩进 */
+        font-size: 12pt;    /* 标准打印字号 */
+    }
+    
+    .ol_lei > li::before {
+        color: #000;        /* 黑色保证可读性 */
+        font-weight: 600;    /* 加粗打印效果 */
+    }
+    
+    .ol_lei > li {
+        page-break-inside: avoid; /* 避免跨页断行 */
+        text-indent: -1.5em;     /* 打印专用缩进 */
+    }
+}
