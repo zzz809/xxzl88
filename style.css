@@ -34,19 +34,43 @@ body {
 }
 
 .header-container {
-    width: var(--content-width);
-    margin: 0 auto;
+    width: 100%; /* 改为满宽度 */
+    margin: 0; /* 移除自动居中 */
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 1.5rem;
-    padding: 0 1rem;
+    padding: 0 1rem; /* 左右保留基础安全间距 */
 }
 
 .header-left {
-    flex: 1;
-    min-width: 0;
+    flex: 0 1 auto;
+    padding-left: 0; /* 完全移除左侧内间距 */ /* 修改点 */
 }
-
+.header-container {
+    align-items: center; /* 垂直居中 */
+  }
+  .separator {
+    height: 40px;
+    width: 1px;
+    background: rgba(255,255,255,0.3);
+    margin: 0 -1rem;
+  }
+  .contact-column {
+    font-size: 19px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    position: relative;
+    padding-left: 1.5rem;
+  }
+  
+  .contact-column::before {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255,255,255,0.3);
+  }
 .header-left h1 {
     color: var(--text-white);
     font-size: clamp(1.5rem, 4vw, 2rem);
@@ -54,14 +78,17 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     margin-bottom: 0.5rem;
+    margin-left: 0; /* 确保标题无间距 */
 }
-
 .contact-info {
     color: var(--text-light);
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
     font-size: 0.95em;
+    justify-content: left; /* 右侧对齐容器 */
+    flex: 1; /* 占据剩余空间 */
+    align-items: center;
 }
 
 .header-qrcode {
@@ -69,8 +96,8 @@ body {
     height: clamp(60px, 8vw, 80px);
     border-radius: var(--radius-base);
     border: 2px solid rgba(255,255,255,0.3);
+    margin-left: auto; /* 强制右对齐 */
 }
-
 /* 主内容区 */
 .content-area {
     flex: 1;
