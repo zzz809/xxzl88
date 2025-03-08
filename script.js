@@ -10,37 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // 桌面端事件
         element.addEventListener('mouseenter', handleEnter);
         element.addEventListener('mouseleave', handleLeave);
-
-        // 移动端事件
-        element.addEventListener('touchstart', handleEnter);
-        element.addEventListener('touchend', handleLeave);
-    };
-
-    // 二维码交互
-    const qrcode = document.querySelector('.header-qrcode');
-    createHoverEffect(
-        qrcode,
-        (el) => {
-            el.style.transform = 'scale(1.8) translateY(20px)';
-            el.style.zIndex = '1000';
-            el.style.boxShadow = '0 8px 20px rgba(0,0,0,0.3)';
-        },
-        (el) => {
-            el.style.transform = 'scale(1)';
-            el.style.zIndex = '';
-            el.style.boxShadow = 'none';
-        }
-    );
-
-    // 自动更新年份
-    const updateCopyrightYear = () => {
-        const footerText = document.querySelector('.footer-content p');
-        if (footerText) {
-            const currentYear = new Date().getFullYear();
-            footerText.innerHTML = footerText.innerHTML
-                .replace('2023-2025', `2023-${currentYear}`)
-                .replace('2025', currentYear);
-        }
     };
     updateCopyrightYear();
 
@@ -73,4 +42,4 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }, 100);
     });
-});
+})
