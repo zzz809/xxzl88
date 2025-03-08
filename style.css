@@ -23,6 +23,7 @@ body {
     display: flex;
     flex-direction: column;
     line-height: 1.6;
+    min-width: 1200px;
 }
 
 /* 头部样式 */
@@ -167,36 +168,6 @@ body {
     transform: translateX(0.5rem);
 }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
-    .header-container {
-        flex-wrap: wrap;
-    }
-    
-    .header-qrcode {
-        order: 1;
-        margin-left: auto;
-    }
-    
-    .announcement-header {
-        border-left-width: 3px;
-    }
-}
-
-@media (max-width: 480px) {
-    .meta time {
-        font-size: 0.85em;
-        padding: 0.2rem 0.8rem;
-    }
-    
-    .back-button {
-        width: 100%;
-        justify-content: center;
-    }
-}
-
-
-
 /* h2标题样式 */
 .announcement-detail h2 {
     background: rgba(127, 19, 134, 0.08);
@@ -221,41 +192,6 @@ body {
     text-align: justify;
     hyphens: auto; /* 自动断字 */
 }
-
-/* 打印优化 */
-@media print {
-    .content-section {
-        line-height: 1.6;
-        font-size: 12pt;
-        padding: 0 !important;
-    }
-    
-    .announcement-detail h2 {
-        background: none;
-        border-left: 3px solid #000;
-        color: #000;
-        page-break-after: avoid;
-    }
-    
-    .content-section a::after {
-        content: " (" attr(href) ")";
-        font-size: 0.9em;
-    }
-}
-
-/* 响应式调整 */
-@media (max-width: 768px) {
-    .announcement-detail h2 {
-        font-size: 1.2rem;
-        padding: 0.8rem 1rem;
-        margin-left: -1rem;
-    }
-    
-    .content-section {
-        padding: 0;
-    }
-}
-
 /* h1标题样式 */
 .announcement-detail h1 {
     color: var(--tsinghua-purple);
@@ -278,31 +214,6 @@ body {
     background: var(--tsinghua-purple);
 }
 
-/* 移动端适配 */
-@media (max-width: 768px) {
-    .announcement-detail h1 {
-        font-size: 1.6rem;
-        padding-bottom: 1rem;
-        margin-bottom: 1.2rem;
-    }
-    
-    .announcement-detail h1::after {
-        width: 80px;
-    }
-}
-
-/* 打印优化 */
-@media print {
-    .announcement-detail h1 {
-        color: #000;
-        border-bottom-color: #666;
-    }
-    
-    .announcement-detail h1::after {
-        background: #666;
-    }
-}
-
 /* 段落样式 */
 .content-section p {
     font-size: 1.05rem;
@@ -312,36 +223,6 @@ body {
     line-height: 1.8;
     color: #333;
 }
-
-/* 有序列表优化 */
-
-/* 打印适配 */
-@media print {
-    .content-section p {
-        font-size: 12pt;
-        text-indent: 2em;
-        line-height: 1.6;
-        color: #000 !important;
-        orphans: 3; /* 避免段内分页 */
-        widows: 3;
-    }
-    /* 显示链接地址 */
-    a[href]::after {
-        content: " (" attr(href) ")";
-        font-size: 0.9em;
-        color: #666;
-    }
-}
-
-/* 响应式优化 */
-@media (max-width: 768px) {
-    .content-section p {
-        font-size: 1rem;
-        text-align: left; /* 移动端左对齐 */
-    }
-}
-
-
 /* ================== 核心列表样式 ================== */
 
 
@@ -370,49 +251,44 @@ body {
     hyphens: auto;            /* 智能断词 */
     font-kerning: normal;      /* 专业字距 */
 }
-
-/* ================== 响应式优化 ================== */
-@media (max-width: 768px) {
-    .p_article {
-        font-size: 0.9rem;     /* 移动端字号 */
-        line-height: 1.65;     /* 紧凑行距 */
-        margin-bottom: 1rem;   /* 缩小间距 */
-        text-align: start;     /* 移动端左对齐 */
-        hyphens: none;         /* 禁用自动断词 */
-    }
-
-    /* 触摸设备优化 */
-    @media (pointer: coarse) {
-        .p_article {
-            line-height: 1.75;  /* 增大触控行距 */
-            margin-bottom: 1.2rem;
-        }
-    }
-}
-
 /* ================== 打印优化 ================== */
 @media print {
-    .p_article {
-        font-size: 12pt !important;     /* 印刷标准 */
-        line-height: 1.75 !important;   /* 打印行距 */
-        color: #000 !important;         /* 纯黑保证清晰 */
-        margin: 0 0 1cm !important;     /* 厘米单位 */
-        orphans: 3;                     /* 控制段末行数 */
-        widows: 3;
-        text-align: justify;            /* 强制两端对齐 */
+    body {
+        /* 重置布局模式 */
+        display: block !important;      /* 禁用flex布局 */
+        min-width: auto !important;    /* 解除宽度限制 */
+        width: 100% !important;        /* 适应纸张宽度 */
+        min-height: auto !important;   /* 避免空白页 */
+        
+        /* 打印标准化 */
+        background: white !important;   /* 强制白底 */
+        color: black !important;       /* 强制黑字 */
+        font-size: 12pt !important;    /* 标准打印字号 */
+        padding: 1cm !important;       /* 安全边距 */
+        line-height: 1.4 !important;   /* 紧凑行距 */
     }
 
-    /* 打印链接处理 */
-    .p_article a {
-        color: #000;
-        text-decoration: underline;
-        word-wrap: break-word;
+    /* 分页优化 */
+    .print-page {
+        page-break-inside: avoid;      /* 防止内容切割 */
+        margin-bottom: 1.5cm;         /* 分页间隔 */
+    }
+
+    /* 表格/图片防溢出 */
+    table, img {
+        max-width: 100% !important;    /* 限制内容宽度 */
+        page-break-inside: avoid;      /* 禁止跨页切割 */
+    }
+    
+    /* 链接显示URL */
+    a::after {
+        content: " (" attr(href) ")";  /* 显示真实链接地址 */
+        font-size: 10pt;
+        color: #666;
     }
 }
-
 /* ================== 高级排版增强 ================== */
 .p_article {
-    text-spacing: auto;                /* 专业间距控制 */
     hanging-punctuation: allow-end;    /* 标点悬挂 */
     font-variant-ligatures: common-ligatures; /* 连字优化 */
 }
@@ -453,44 +329,6 @@ body {
     text-align: right;
     font-variant-numeric: tabular-nums
 }
-
-/* ================== 响应式优化 ================== */
-@media (max-width: 768px) {
-    .ol_lei {
-        --base-font: 1rem;  /* 14px */
-        --spacing-unit: 1.2em;
-    }
-    
-    .ol_lei > li {
-        padding-left: 3.5em;
-    }
-    
-    .ol_lei > li::before {
-        left: 0.8em;
-        width: 1.8em;
-    }
-}
-
-/* ================== 打印优化 ================== */
-@media print {
-    .ol_lei {
-        --base-font: 1rem;
-        --line-ratio: 1.75;
-        --spacing-unit: 1.25em;
-    }
-    
-    .ol_lei > li::before {
-        color: #000 !important;
-        font-weight: 600;
-    }
-}
-
-/* ================== 尺寸验证系统 ================== */
-.ol_lei > li {
-    font-size: calc(var(--base-font) * 1);
-    line-height: calc(var(--base-font) * var(--line-ratio));
-}
-
 .ol_lei > li::before {
     font-size: calc(var(--base-font) * 1);
     line-height: calc(var(--base-font) * var(--line-ratio));
